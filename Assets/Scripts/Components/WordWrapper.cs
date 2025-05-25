@@ -82,5 +82,10 @@ namespace UniBudouX.Components
             tmpText.ForceMeshUpdate(true, true);
             hasTextChanged = false;
         }
+        #if UNITY_EDITOR
+        private void OnValidate() 
+        {
+            UpdateTextWidth();
+        }
     }
 }
