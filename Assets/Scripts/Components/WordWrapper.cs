@@ -87,5 +87,6 @@ namespace UniBudouX.Components
         {
             UpdateTextWidth();
         }
+        #endif
     }
 }
