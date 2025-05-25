@@ -9,8 +9,8 @@ namespace UniBudouX.Components
     [RequireComponent(typeof(TMP_Text))]
     public class WordWrapper : MonoBehaviour
     {
-        private TMP_Text tmpText = null;
-        private RectTransform rectTransform = null;
+        [SerializeField] private TMP_Text tmpText;
+        [SerializeField] private RectTransform rectTransform;
         private List<string> chunks = null;
         
         private Rect rectCache = Rect.zero;
@@ -18,9 +18,6 @@ namespace UniBudouX.Components
 
         private void Awake()
         {
-            rectTransform = GetComponent<RectTransform>();
-            tmpText = GetComponent<TMP_Text>();
-
             if (tmpText == null) { return;}
             
             // 初期文字列をチャンク化
@@ -82,9 +79,15 @@ namespace UniBudouX.Components
             tmpText.ForceMeshUpdate(true, true);
             hasTextChanged = false;
         }
+        private void Reset() 
+        {
+            rectTransform = GetComponent<RectTransform>();
+            tmpText = GetComponent<TMP_Text>();
+        }
         #if UNITY_EDITOR
         private void OnValidate() 
         {
+            Reset();
             UpdateTextWidth();
         }
         #endif
